@@ -93,5 +93,10 @@ public class Partita {
 
 	public void setCfu(int cfu) {
 		giocatore.setCfu(cfu);	
+	}
+
+	public boolean giocatoreIsVivo() {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 }
