@@ -96,6 +96,7 @@ public class Partita {
 	}
 
 	public boolean giocatoreIsVivo() {
-		return this.giocatore.getCfu() != 0;
+		// TODO Auto-generated method stub
+		return false;
 	}	
 }

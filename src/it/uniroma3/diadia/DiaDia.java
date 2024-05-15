@@ -1,8 +1,8 @@
 package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.IOConsole.IOConsole;
-import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
@@ -33,25 +33,19 @@ public class DiaDia {
 
 	private Partita partita;
 
-	private IO io;
+	private IO ioConsole;
 
 	public DiaDia(IO io) {
 		this.partita = new Partita();
-		this.io = io;
-	}
-
-	public DiaDia(Labirinto labirinto, IO io) {
-		this(io);
-		this.partita.setLabirinto(labirinto);
+		this.ioConsole = io;
 	}
 
 	public void gioca() {
 		String istruzione;
 
-		io.mostraMessaggio(MESSAGGIO_BENVENUTO);
-		
+		ioConsole.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		do		
-			istruzione = io.leggiRiga();	
+			istruzione = ioConsole.leggiRiga();	
 		while (!processaIstruzione(istruzione));
 	}   
 
@@ -63,28 +57,20 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire;
-		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica(io);
+		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
 		
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
 		if (this.partita.vinta())
-			io.mostraMessaggio("Hai vinto!");
+			System.out.println("Hai vinto!");
 		if (!this.partita.giocatoreIsVivo())
-			io.mostraMessaggio("Hai esaurito i CFU...");
+			System.out.println("Hai esaurito i CFU...");
 		return this.partita.isFinita();
 	}
 
 	public static void main(String[] argc) {
-		/* N.B. unica istanza di IOConsole
-		di cui sia ammessa la creazione */
 		IO io = new IOConsole();
-		Labirinto labirinto = new LabirintoBuilder()
-		.addStanzaIniziale("LabCampusOne")
-		.addStanzaVincente("Biblioteca")
-		.addAdiacenza("LabCampusOne", "Biblioteca", "ovest")
-		.getLabirinto();
-		//Labirinto labirinto = new Labirinto();
-		DiaDia gioco = new DiaDia(labirinto, io);
+		DiaDia gioco = new DiaDia(io);
 		gioco.gioca();
 	}
 }

@@ -1,12 +1,13 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.IOConsole.IOConsole;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPrendi implements Comando {
 	
-	private IO io;
+	static final private IO ioConsole = new IOConsole();
 	
 	String nomeAttrezzoDaPrendere;
 
@@ -18,9 +19,9 @@ public class ComandoPrendi implements Comando {
 			if(partita.getGiocatore().getBorsa().addAttrezzo(attrezzoDaPrendere)) 
 				partita.getStanzaCorrente().removeAttrezzo(attrezzoDaPrendere);
 			else 
-				io.mostraMessaggio("Borsa piena");
+				ioConsole.mostraMessaggio("Borsa piena");
 		}
-		else io.mostraMessaggio("Attrezzo non presente");
+		else ioConsole.mostraMessaggio("Attrezzo non presente");
 	}
 
 	@Override
@@ -37,11 +38,6 @@ public class ComandoPrendi implements Comando {
 	public String getParametro() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void setIO(IO io) {
-		this.io = io;
 	}
 
 }
