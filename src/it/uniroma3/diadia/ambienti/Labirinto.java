@@ -34,7 +34,7 @@ public class Labirinto {
 	}
 	
 	/**
-     * Crea tutte le stanze e le porte di collegamento
+     * NON PIÙ IN USO
      */
     public void creaStanze() {
 

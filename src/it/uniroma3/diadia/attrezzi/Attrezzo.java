@@ -1,6 +1,6 @@
 package it.uniroma3.diadia.attrezzi;
 
-
+import it.uniroma3.diadia.ambienti.Stanza;
 
 /**
  * Una semplice classe che modella un attrezzo.
@@ -12,7 +12,7 @@ package it.uniroma3.diadia.attrezzi;
  * @see Stanza
  * @version base
  */
-public class Attrezzo {
+public class Attrezzo{
 
 	private String nome;
 	private int peso;
@@ -49,6 +49,23 @@ public class Attrezzo {
 	 */
 	public String toString() {
 		return this.getNome()+" ("+this.getPeso()+"kg)";
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.nome.hashCode() + this.peso;
+	}
+    
+	@Override
+	public boolean equals(Object o) {
+		Attrezzo that = (Attrezzo) o;
+		
+		if((this.getNome().equals(that.getNome())) && (this.getPeso() == that.getPeso())){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }
