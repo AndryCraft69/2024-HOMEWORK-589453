@@ -1,13 +1,15 @@
 package it.uniroma3.diadia.ambienti;
 
+import it.uniroma3.diadia.attrezzi.Attrezzo;
+
 public class StanzaBloccata extends Stanza {
 	private String direzioneBloccata;
-	private String chiave;
+	private Attrezzo chiave;
 	
-	public StanzaBloccata(String nome, String direzioneBloccata, String chiave) {
+	public StanzaBloccata(String nome, String direzioneBloccata, String nomeChiave) {
 		super(nome);
 		this.direzioneBloccata = direzioneBloccata;
-		this.chiave = chiave;
+		this.chiave = new Attrezzo(nomeChiave, 0);
 	}
 	
 	@Override
@@ -23,7 +25,6 @@ public class StanzaBloccata extends Stanza {
 	
 	@Override
 	public String getDescrizione() {
-		
 		if(super.hasAttrezzo(chiave) == true) {
 			return super.getDescrizione();
 		}

@@ -3,26 +3,16 @@ package it.uniroma3.diadia.ambienti;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaBuia extends Stanza {
-	private String oggettoCheIlluminaLaStanza;
+	private Attrezzo oggettoCheIlluminaLaStanza;
 	
-	public StanzaBuia(String nome, String oggettoCheIlluminaLaStanza) {
+	public StanzaBuia(String nome, String nomeOggettoCheIlluminaLaStanza) {
 		super(nome);		
-		this.oggettoCheIlluminaLaStanza = oggettoCheIlluminaLaStanza;
+		this.oggettoCheIlluminaLaStanza = new Attrezzo(nomeOggettoCheIlluminaLaStanza, 0);
 	}
 	
 	@Override
-	public String getDescrizione() {
-		Attrezzo[] attrezzi = super.getAttrezzi();
-		boolean lanternaPresente = false;
-		
-		for(Attrezzo attrezzo: attrezzi) {
-			if(attrezzo != null) {
-				if(attrezzo.getNome().equals(oggettoCheIlluminaLaStanza))
-					lanternaPresente = true;
-			}
-		}
-		
-		if(lanternaPresente == true) {
+	public String getDescrizione() {		
+		if(super.getAttrezzi().contains(oggettoCheIlluminaLaStanza)) {
 			return super.getDescrizione();
 		}
 		else {

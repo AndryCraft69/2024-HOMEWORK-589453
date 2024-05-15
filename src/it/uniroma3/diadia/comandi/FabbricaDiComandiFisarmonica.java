@@ -2,9 +2,16 @@ package it.uniroma3.diadia.comandi;
 
 import java.util.Scanner;
 
+import it.uniroma3.diadia.IO;
+
 public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi {
 	
 	static final private String[] elencoComandi = {"vai", "aiuto", "prendi", "posa", "fine", "guarda"};
+	private IO io;
+	
+	public FabbricaDiComandiFisarmonica(IO io) {
+		this.io = io;
+	}
 	
 	@Override
 	public Comando costruisciComando(String istruzione) {
@@ -37,6 +44,7 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi {
 			comando = new ComandoNonValido();
 			
 		comando.setParametro(parametro);
+		comando.setIO(io);
 		return comando;
 	}
 }

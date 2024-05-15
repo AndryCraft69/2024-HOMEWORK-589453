@@ -1,22 +1,21 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.IOConsole.IOConsole;
 import it.uniroma3.diadia.IO;
 
 public class ComandoFine implements Comando {
-	
-	static final private IO ioConsole = new IOConsole();
+	private IO io;
+
 
 	@Override
 	public void esegui(Partita partita) {
-		ioConsole.mostraMessaggio("Grazie di aver giocato!");
+		io.mostraMessaggio("Grazie di aver giocato!");
+		partita.setFinita(true);
 	}
 
 	@Override
 	public void setParametro(String parametro) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -28,6 +27,12 @@ public class ComandoFine implements Comando {
 	public String getParametro() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void setIO(IO io) {
+		this.io = io;
 	}
 
 }
