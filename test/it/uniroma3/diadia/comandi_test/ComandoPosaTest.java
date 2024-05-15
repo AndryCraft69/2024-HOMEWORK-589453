@@ -31,7 +31,7 @@ public class ComandoPosaTest {
 	public void test_esegui_oggettoNonPresenteInBorsa() {		
 		comando.setParametro("piccone");
 		comando.esegui(partita);
-		assertFalse(stanza.hasAttrezzo("piccone"));
+		assertFalse(stanza.hasAttrezzo(new Attrezzo("piccone", 0)));
 	}
 	@Test
 	public void test_esegui_stanzaPiena() {	
@@ -44,16 +44,16 @@ public class ComandoPosaTest {
 		
 		comando.setParametro("piccone");
 		comando.esegui(partita);
-		assertFalse(stanza.hasAttrezzo("piccone"));
-		assertTrue(borsa.hasAttrezzo("piccone"));
+		assertFalse(stanza.hasAttrezzo(new Attrezzo("piccone", 0)));
+		assertTrue(borsa.hasAttrezzo(new Attrezzo("piccone", 0)));
 	}
 	@Test
 	public void test_esegui_oggettoPosato() {
 		borsa.addAttrezzo(new Attrezzo("piccone", 3));
 		comando.setParametro("piccone");
 		comando.esegui(partita);
-		assertTrue(stanza.hasAttrezzo("piccone"));
-		assertFalse(borsa.hasAttrezzo("piccone"));
+		assertTrue(stanza.hasAttrezzo(new Attrezzo("piccone", 0)));
+		assertFalse(borsa.hasAttrezzo(new Attrezzo("piccone", 0)));
 	}
 
 }

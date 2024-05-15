@@ -2,9 +2,9 @@ package it.uniroma3.diadia.comandi_test;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.IOConsole.IOConsole;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
@@ -12,7 +12,7 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 public class FabbricaDiComandiFisarmonicaTest {
 		
 	private String istruzione;
-	private FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
+	private FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica(new IOConsole());
 	private Comando comando;
 	 
 	public void setUp(String istruzione) {
