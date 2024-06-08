@@ -1,11 +1,13 @@
 package it.uniroma3.diadia;
 
+import java.util.Scanner;
+
 import it.uniroma3.diadia.IOConsole.IOConsole;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Partita;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -42,14 +44,14 @@ public class DiaDia {
 
 	public DiaDia(Labirinto labirinto, IO io) {
 		this(io);
-		this.partita.setLabirinto(labirinto);
+		this.partita = new Partita(labirinto);
 	}
 
 	public void gioca() {
 		String istruzione;
 
 		io.mostraMessaggio(MESSAGGIO_BENVENUTO);
-		
+
 		do		
 			istruzione = io.leggiRiga();	
 		while (!processaIstruzione(istruzione));
@@ -63,8 +65,8 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire;
-		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica(io);
-		
+		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva(io);
+
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
 		if (this.partita.vinta())
@@ -77,14 +79,25 @@ public class DiaDia {
 	public static void main(String[] argc) {
 		/* N.B. unica istanza di IOConsole
 		di cui sia ammessa la creazione */
-		IO io = new IOConsole();
+		Scanner scannerDiLinee = null;
+		try{
+			scannerDiLinee = new Scanner(System.in);
+			IO io = new IOConsole(scannerDiLinee);
+			/*
 		Labirinto labirinto = new LabirintoBuilder()
 		.addStanzaIniziale("LabCampusOne")
 		.addStanzaVincente("Biblioteca")
 		.addAdiacenza("LabCampusOne", "Biblioteca", "ovest")
 		.getLabirinto();
-		//Labirinto labirinto = new Labirinto();
-		DiaDia gioco = new DiaDia(labirinto, io);
-		gioco.gioca();
+			 */
+			//Labirinto labirinto = new Labirinto();
+			Labirinto labirinto = Labirinto.newBuilder("labirinto.txt").getLabirinto();
+			DiaDia gioco = new DiaDia(labirinto, io);
+			gioco.gioca();
+		}
+		finally {
+			scannerDiLinee.close();
+		}
+
 	}
 }

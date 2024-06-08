@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.giocatore;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +65,7 @@ public class Borsa {
 	}
 	
 	public boolean hasAttrezzo(Attrezzo attrezzo) {
-		return this.getAttrezzo(attrezzo.getNome()) != null;
+		return this.attrezzi.containsValue(attrezzo);
 	}
 	 
 	public Attrezzo removeAttrezzo(String nomeAttrezzoDaRimuovere) {
@@ -89,16 +90,20 @@ public class Borsa {
 	
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
 		ComparatorePerPeso comparatore = new ComparatorePerPeso();
-		Collections.sort((List<Attrezzo>) this.attrezzi.values(), comparatore);
-		return (List<Attrezzo>) this.attrezzi.values();
+		List<Attrezzo> attrezziOrdinatiPerPeso = new ArrayList<>();
+		attrezziOrdinatiPerPeso.addAll(this.attrezzi.values());
+		Collections.sort(attrezziOrdinatiPerPeso, comparatore);
+		return attrezziOrdinatiPerPeso;
 	}
 	
 	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
 		ComparatorePerNome comparatore = new ComparatorePerNome();
-		Collections.sort((List<Attrezzo>) this.attrezzi.values(), comparatore);
-		SortedSet<Attrezzo> attrezziOrdinatiPerNome = new TreeSet<Attrezzo>(comparatore);
+		List<Attrezzo> attrezziOrdinatiPerNome = new ArrayList<>();
 		attrezziOrdinatiPerNome.addAll(this.attrezzi.values());
-		return attrezziOrdinatiPerNome;
+		Collections.sort(attrezziOrdinatiPerNome, comparatore);
+		SortedSet<Attrezzo> attrezziOrdinatiPerNomeInsieme = new TreeSet<Attrezzo>(comparatore);
+		attrezziOrdinatiPerNomeInsieme.addAll(attrezziOrdinatiPerNome);
+		return attrezziOrdinatiPerNomeInsieme;
 	}
 	
 	public Map<Integer, Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
@@ -121,10 +126,12 @@ public class Borsa {
 	
 	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
 		ComparatorePerPesoENome comparatore = new ComparatorePerPesoENome();
-		Collections.sort((List<Attrezzo>) this.attrezzi.values(), comparatore);
-		SortedSet<Attrezzo> set = new TreeSet<Attrezzo>(comparatore);
-		set.addAll(this.attrezzi.values());
-		return set;
+		List<Attrezzo> attrezziOrdinatiPerPesoENome = new ArrayList<>();
+		attrezziOrdinatiPerPesoENome.addAll(this.attrezzi.values());
+		Collections.sort(attrezziOrdinatiPerPesoENome, comparatore);
+		SortedSet<Attrezzo> attrezziOrdinatiPerPesoENomeInsieme = new TreeSet<Attrezzo>(comparatore);
+		attrezziOrdinatiPerPesoENomeInsieme.addAll(attrezziOrdinatiPerPesoENome);
+		return attrezziOrdinatiPerPesoENomeInsieme;
 	}
 }
 

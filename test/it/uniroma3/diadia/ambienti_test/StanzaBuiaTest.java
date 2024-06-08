@@ -8,7 +8,8 @@ import it.uniroma3.diadia.ambienti.*;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaBuiaTest {
-	Stanza stanza = new StanzaBuia("Stanza", "lanterna");
+	private Attrezzo lanterna = new Attrezzo("lanterna", 0);
+	private Stanza stanza = new StanzaBuia("Stanza", lanterna);
 	
 	@Test
 	public void test_getDescrizione_stanzaBuiaSenzaOggetto() {
@@ -16,7 +17,7 @@ public class StanzaBuiaTest {
 	}
 	@Test
 	public void test_getDescrizione_stanzaBuiaConOggetto() {
-		stanza.addAttrezzo(new Attrezzo("lanterna", 3));
-		assertEquals("Stanza\n" + "Uscite: \n" + "Attrezzi nella stanza: lanterna (3kg) ", stanza.getDescrizione());
+		stanza.addAttrezzo(lanterna);
+		assertEquals("Stanza\n" + "Uscite: \n" + "Attrezzi nella stanza: lanterna (0kg) ", stanza.getDescrizione());
 	}
 }

@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.ambienti_test;
 
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.*;
 
@@ -51,13 +52,13 @@ public class StanzaTest {
 	}
 	@Test
 	public void test_getStanzaAdiacente_stanzaPresenteInQuellaDirezione() {
-		stanza.impostaStanzaAdiacente("nord", stanza1);
-		assertEquals("Stanza", stanza.getStanzaAdiacente("nord").getNome());
+		stanza.impostaStanzaAdiacente(Direzione.nord, stanza1);
+		assertEquals("Stanza", stanza.getStanzaAdiacente(Direzione.nord).getNome());
 	}
 	@Test
 	public void test_getStanzaAdiacente_stanzaNonPresenteInQuellaDirezione() {
-		stanza.impostaStanzaAdiacente("nord", stanza1);
-		assertEquals(null, stanza.getStanzaAdiacente("sud"));
+		stanza.impostaStanzaAdiacente(Direzione.nord, stanza1);
+		assertEquals(null, stanza.getStanzaAdiacente(Direzione.sud));
 	}
 	
 	@Test
@@ -67,7 +68,7 @@ public class StanzaTest {
 	@Test
 	public void test_hasAttrezzo_attrezzoPresente() {
 		stanza.addAttrezzo(attrezzo);
-		assertEquals(true, stanza.hasAttrezzo(new Attrezzo("piccone", 0)));
+		assertEquals(true, stanza.hasAttrezzo(attrezzo));
 	}
 	@Test
 	public void test_hasAttrezzo_attrezzoNonPresente() {
@@ -97,7 +98,7 @@ public class StanzaTest {
 	@Test
 	public void test_toString_stanzaConNomeUscitaEAttrezzo() {
 		stanza1.addAttrezzo(attrezzo);
-		stanza1.impostaStanzaAdiacente("nord", null);
+		stanza1.impostaStanzaAdiacente(Direzione.nord, null);
 		assertEquals("Stanza\n" + "Uscite:  nord\n" + "Attrezzi nella stanza: piccone (3kg) ", stanza1.toString());
 	}
 	@Test
@@ -105,11 +106,11 @@ public class StanzaTest {
 		for (int i=1; i<=10; i++) {
 			stanza1.addAttrezzo(new Attrezzo("piccone" + i, 3));
 		}
-		stanza1.impostaStanzaAdiacente("nord", null);
-		stanza1.impostaStanzaAdiacente("sud", null);
-		stanza1.impostaStanzaAdiacente("est", null);
-		stanza1.impostaStanzaAdiacente("ovest", null);
-		assertEquals("Stanza\n" + "Uscite:  nord sud ovest est\n" + "Attrezzi nella stanza: piccone2 (3kg) piccone3 (3kg) piccone4 (3kg) piccone5 (3kg) piccone6 (3kg) piccone7 (3kg) piccone8 (3kg) piccone9 (3kg) piccone10 (3kg) piccone1 (3kg) ", stanza1.toString());
+		stanza1.impostaStanzaAdiacente(Direzione.nord, null);
+		stanza1.impostaStanzaAdiacente(Direzione.sud, null);
+		stanza1.impostaStanzaAdiacente(Direzione.est, null);
+		stanza1.impostaStanzaAdiacente(Direzione.ovest, null);
+		assertEquals("Stanza\n" + "Uscite:  nord sud est ovest\n" + "Attrezzi nella stanza: piccone5 (3kg) piccone6 (3kg) piccone7 (3kg) piccone8 (3kg) piccone9 (3kg) piccone10 (3kg) piccone1 (3kg) piccone2 (3kg) piccone3 (3kg) piccone4 (3kg) ", stanza1.toString());
 	}
 	
 }

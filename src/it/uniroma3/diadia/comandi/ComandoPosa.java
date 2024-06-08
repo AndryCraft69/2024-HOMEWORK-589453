@@ -1,48 +1,22 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.ambienti.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPosa implements Comando {
-	
-	private IO io;
-
-	String nomeAttrezzoDaPosare;
+public class ComandoPosa extends AbstractComando {
 	
 	@Override
 	public void esegui(Partita partita) {
-		Attrezzo attrezzoDaPosare = partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzoDaPosare);
+		Attrezzo attrezzoDaPosare = partita.getGiocatore().getBorsa().getAttrezzo(super.getParametro());
 		
 		if(attrezzoDaPosare != null) {
 			if(partita.getStanzaCorrente().addAttrezzo(attrezzoDaPosare)) 
-				partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzoDaPosare);
+				partita.getGiocatore().getBorsa().removeAttrezzo(super.getParametro());
 			else 
-				io.mostraMessaggio("Stanza piena");
+				super.getIo().mostraMessaggio("Stanza piena");
 		}
 		else 
-			io.mostraMessaggio("Attrezzo non presente");
-	}
-
-	@Override
-	public void setParametro(String parametro) {
-		this.nomeAttrezzoDaPosare = parametro;
-	}
-
-	@Override
-	public String getNome() {
-		return "posa";
-	}
-
-	@Override
-	public String getParametro() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setIO(IO io) {
-		this.io = io;
+			super.getIo().mostraMessaggio("Attrezzo non presente");
 	}
 
 }

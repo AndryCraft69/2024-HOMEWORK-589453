@@ -1,0 +1,11 @@
+Stanze: Biblioteca, N10, N11
+Stanze buie: Sgabuzzino Torcia 0
+Stanze bloccate: Ufficio ovest Chiave
+Stanze magiche: Bagno 1
+Maghi: Merlino Bacchetta 0 Biblioteca
+Streghe: Circe Ufficio
+Cani: Inu Croccantini Guinzaglio 0 Sgabuzzino
+Inizio: N10
+Vincente: N11
+Attrezzi: Martello 10 Biblioteca, Pinza 2 N10, Chiave 0 Ufficio, Torcia 0 Sgabuzzino 
+Uscite: Biblioteca nord N10, Biblioteca sud N11, Biblioteca ovest Ufficio, Ufficio ovest Sgabuzzino, N11 est Bagno

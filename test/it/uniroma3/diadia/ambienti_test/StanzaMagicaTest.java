@@ -19,7 +19,7 @@ public class StanzaMagicaTest {
 	public void test_addAttrezzo_sogliaSuperata() {
 		stanza.addAttrezzo(new Attrezzo("piccone", 3));
 		stanza.addAttrezzo(new Attrezzo("piccone", 3));
-		assertEquals("Stanza Magica\n" + "Uscite: \n" + "Attrezzi nella stanza: enoccip (6kg) piccone (3kg) ", stanza.toString());
+		assertEquals("Stanza Magica\n" + "Uscite: \n" + "Attrezzi nella stanza: piccone (3kg) enoccip (6kg) ", stanza.toString());
 	}
 	
 

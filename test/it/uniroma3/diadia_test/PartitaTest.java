@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import it.uniroma3.diadia.giocatore.Giocatore;
-import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class PartitaTest {
@@ -42,7 +42,7 @@ public class PartitaTest {
 	@Test
 	public void test_isFinita_vinta() {
 		Partita partita = new Partita();
-		Labirinto labirinto = new Labirinto();
+		Labirinto labirinto = Labirinto.newBuilder().getLabirinto();
 		Stanza stanza = new Stanza();
 		labirinto.setStanzaFinale(stanza);
 		partita.setLabirinto(labirinto);

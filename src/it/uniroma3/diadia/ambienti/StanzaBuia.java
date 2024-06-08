@@ -5,9 +5,9 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class StanzaBuia extends Stanza {
 	private Attrezzo oggettoCheIlluminaLaStanza;
 	
-	public StanzaBuia(String nome, String nomeOggettoCheIlluminaLaStanza) {
-		super(nome);		
-		this.oggettoCheIlluminaLaStanza = new Attrezzo(nomeOggettoCheIlluminaLaStanza, 0);
+	public StanzaBuia(String nome, Attrezzo oggettoCheIlluminaLaStanza) {
+		super(nome);
+		this.oggettoCheIlluminaLaStanza = oggettoCheIlluminaLaStanza;
 	}
 	
 	@Override

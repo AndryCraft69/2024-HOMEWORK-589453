@@ -2,10 +2,14 @@ package it.uniroma3.diadia.comandi_test;
 
 import static org.junit.Assert.*;
 
+import java.util.Scanner;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole.IOConsole;
+import it.uniroma3.diadia.ambienti.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -19,6 +23,7 @@ public class ComandoPosaTest {
 	private Borsa borsa = new Borsa();
 	private Comando comando = new ComandoPosa();
 	private Stanza stanza = new Stanza();
+	IO io = new IOConsole(new Scanner(System.in));
 	
 	@Before
 	public void setUp() {
@@ -30,6 +35,7 @@ public class ComandoPosaTest {
 	@Test
 	public void test_esegui_oggettoNonPresenteInBorsa() {		
 		comando.setParametro("piccone");
+		comando.setIO(io);
 		comando.esegui(partita);
 		assertFalse(stanza.hasAttrezzo(new Attrezzo("piccone", 0)));
 	}
@@ -43,17 +49,18 @@ public class ComandoPosaTest {
 		}
 		
 		comando.setParametro("piccone");
+		comando.setIO(io);
 		comando.esegui(partita);
-		assertFalse(stanza.hasAttrezzo(new Attrezzo("piccone", 0)));
-		assertTrue(borsa.hasAttrezzo(new Attrezzo("piccone", 0)));
+		assertFalse(stanza.hasAttrezzo(new Attrezzo("piccone", 3)));
+		assertTrue(borsa.hasAttrezzo(new Attrezzo("piccone", 3)));
 	}
 	@Test
 	public void test_esegui_oggettoPosato() {
 		borsa.addAttrezzo(new Attrezzo("piccone", 3));
 		comando.setParametro("piccone");
+		comando.setIO(io);
 		comando.esegui(partita);
-		assertTrue(stanza.hasAttrezzo(new Attrezzo("piccone", 0)));
-		assertFalse(borsa.hasAttrezzo(new Attrezzo("piccone", 0)));
+		assertTrue(stanza.hasAttrezzo(new Attrezzo("piccone", 3)));
+		assertFalse(borsa.hasAttrezzo(new Attrezzo("piccone", 3)));
 	}
-
 }

@@ -8,30 +8,31 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import org.junit.Test;
 
 public class StanzaBloccataTest {
-	Stanza stanza = new StanzaBloccata("Stanza", "nord", "chiave");
+	private String nomeChiave = "chiave";
+	Stanza stanza = new StanzaBloccata("Stanza", Direzione.nord, nomeChiave);
 	
-	public void setUp() {
-		stanza.addAttrezzo(new Attrezzo("chiave", 3));
+	public void aggiungiChiave() {
+		stanza.addAttrezzo(new Attrezzo(nomeChiave, 0));
 	}
 
 	@Test
 	public void test_getStanzaAdiacente_stanzaConChiave() {
-		setUp();
+		aggiungiChiave();
 		Stanza stanzaANord = new Stanza("Seconda stanza");
-		stanza.impostaStanzaAdiacente("nord", stanzaANord);
-		assertEquals(stanzaANord, stanza.getStanzaAdiacente("nord"));
+		stanza.impostaStanzaAdiacente(Direzione.nord, stanzaANord);
+		assertEquals(stanzaANord, stanza.getStanzaAdiacente(Direzione.nord));
 	}
 	@Test
 	public void test_getStanzaAdiacente_stanzaSenzaChiave() {
 		Stanza stanzaANord = new Stanza("Seconda stanza");
-		stanza.impostaStanzaAdiacente("nord", stanzaANord);
-		assertEquals(stanza, stanza.getStanzaAdiacente("nord"));
+		stanza.impostaStanzaAdiacente(Direzione.nord, stanzaANord);
+		assertEquals(stanza, stanza.getStanzaAdiacente(Direzione.nord));
 	}
 	
 	@Test
 	public void test_getDescrizione_stanzaConChiave() {
-		setUp();
-		assertEquals("Stanza\n" + "Uscite: \n"+ "Attrezzi nella stanza: chiave (3kg) ", stanza.getDescrizione());
+		aggiungiChiave();
+		assertEquals("Stanza\n" + "Uscite: \n"+ "Attrezzi nella stanza: chiave (0kg) ", stanza.getDescrizione());
 	}
 	@Test
 	public void test_getDescrizione_stanzaSenzaChiave() {
